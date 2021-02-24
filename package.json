@@ -1,0 +1,17 @@
+{
+	"name": "com.andtech.build-utility",
+	"version": "0.1.0",
+	"displayName": "Build Utility",
+	"description": "Simple build helper",
+	"author": {
+		"name": "AndrewMJordan",
+		"email": null
+	},
+	"samples": [
+		{
+			"displayName": "Version Label",
+			"Description": "Assets to display the version in the build.",
+			"path": "Samples~/Version Label"
+		}
+	]
+}
