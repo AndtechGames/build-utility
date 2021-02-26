@@ -8,22 +8,35 @@ Simple build utility for Unity
 3. Type `https://github.com/AndrewMJordan/build-utility.git#upm` then press enter.
 
 ## Usage
+Invoke `unity.exe` and use the `executeMethod` option to execute the build utility:
+```
+Andtech.BuildUtility.Builder.Build [-output <DIRECTORY] [-name <NAME>]
+```
+
 ### Command Line
 1. Run unity.exe with the `executeMethod` option.
 ```
-> unity.exe <PROJECT_PATH> -executeMethod Andtech.BuildUtility.Build
+> unity.exe <PROJECT_PATH> -executeMethod Andtech.BuildUtility.Builder.Build
 ```
+
 2. Use the `revision` option if you want a revision string available in your build. For example, your CI/CD pipeline can include the commit hash in each build.
 ```
-> unity.exe <PROJECT_PATH> -executeMethod Andtech.BuildUtility.Build -revision ca82a6df
+> unity.exe <PROJECT_PATH> -executeMethod Andtech.BuildUtility.Builder.Build -revision ca82a6df
 ```
-3. Use the `output` options to give an explicit name to your build. (If you omit the extension, an extension will automatically be added based on the build target)
+
+3. Use the `output` option to build to the specified directory.
 ```
-> unity.exe <PROJECT_PATH> -executeMethod Andtech.BuildUtility.Build -output MyBuild
-> unity.exe <PROJECT_PATH> -executeMethod Andtech.BuildUtility.Build -output MyAndroidApp.apk
-> unity.exe <PROJECT_PATH> -executeMethod Andtech.BuildUtility.Build -output MyAndroidApp
+> unity.exe <PROJECT_PATH> -executeMethod Andtech.BuildUtility.Builder.Build -output $HOME
 ```
-4. Access the revision string via `BuildVersioner`.
+
+4. Use the `name` option to give an explicit name to your build. (If you omit the extension, an extension will automatically be added based on the build target)
+```
+> unity.exe <PROJECT_PATH> -executeMethod Andtech.BuildUtility.Builder.Build -name MyBuild
+> unity.exe <PROJECT_PATH> -executeMethod Andtech.BuildUtility.Builder.Build -name MyAndroidApp.apk
+> unity.exe <PROJECT_PATH> -executeMethod Andtech.BuildUtility.Builder.Build -name MyAndroidApp
+```
+
+5. Access the revision string via `BuildVersioner`.
 ```csharp
 if (BuildVersioner.TryReadVersionFile(out var versionInfo)) {
 	string version = versionInfo.RawVersion;
