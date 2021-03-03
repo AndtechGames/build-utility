@@ -7,7 +7,7 @@ namespace Andtech.BuildUtility {
 	public class BuildHelper {
 		public readonly string[] Args;
 
-		public BuildHelper(string[] args) {
+		public BuildHelper(params string[] args) {
 			Args = args;
 		}
 
@@ -47,78 +47,40 @@ namespace Andtech.BuildUtility {
 
 		public string GetOutputPath() => GetOutputPath(GetBuildTarget());
 
-		public string GetOutputPath(BuildTarget buildTarget) {
-			var extension = GetExtension(buildTarget);
+		public string GetOutputPath(BuildTarget buildTarget)
+		{
+			var extension = PlatformUtility.GetExtension(buildTarget);
 
 			var defaultDirectory = "Builds";
 			var defaultFilename = string.Concat(PlayerSettings.productName, extension);
+			var outputDirectory = defaultDirectory;
 
-			string outputDirectory = defaultDirectory;
-			string outputFilename = defaultFilename;
-			if (TryGetArgument("output", out var output)) {
-				if (Path.HasExtension(output)) {
+			var outputFilename = defaultFilename;
+			if (TryGetArgument("output", out var output))
+			{
+				if (Path.HasExtension(output))
+				{
 					outputDirectory = Path.GetDirectoryName(output);
 					outputFilename = Path.GetFileName(output);
 				}
-				else {
+				else
+				{
 					outputDirectory = output;
 					outputFilename = defaultFilename;
 				}
 			}
 
-			if (TryGetArgument("name", out string name)) {
+			if (TryGetArgument("name", out string name))
+			{
 				outputFilename = Path.HasExtension(name) ? name : string.Concat(name, extension);
 			}
 
-			return Path.Combine(outputDirectory, outputFilename);
-		}
-
-		public string GetExtension(BuildTarget buildTarget) {
-			switch (buildTarget) {
-				case BuildTarget.StandaloneOSX:
-					return ".app";
-				case BuildTarget.StandaloneWindows:
-				case BuildTarget.StandaloneWindows64:
-					return ".exe";
-				case BuildTarget.iOS:
-					return string.Empty;
-				case BuildTarget.Android:
-					return ".apk";
-				case BuildTarget.StandaloneLinux:
-					break;
-				case BuildTarget.WebGL:
-					break;
-				case BuildTarget.WSAPlayer:
-					break;
-				case BuildTarget.StandaloneLinux64:
-					break;
-				case BuildTarget.StandaloneLinuxUniversal:
-					break;
-				case BuildTarget.Tizen:
-					break;
-				case BuildTarget.PSP2:
-					break;
-				case BuildTarget.PS4:
-					break;
-				case BuildTarget.PSM:
-					break;
-				case BuildTarget.XboxOne:
-					break;
-				case BuildTarget.N3DS:
-					break;
-				case BuildTarget.WiiU:
-					break;
-				case BuildTarget.tvOS:
-					break;
-				case BuildTarget.Switch:
-					break;
-				case BuildTarget.NoTarget:
-					break;
-				default:
-					break;
+			if (PlatformUtility.DoesTargetBuildAsFolder(buildTarget))
+			{
+				return outputDirectory;
 			}
 
-			return ".unknown";
+			return Path.Combine(outputDirectory, outputFilename);
 		}
 	}
 }
