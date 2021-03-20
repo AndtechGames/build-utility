@@ -60,8 +60,20 @@ namespace Andtech.BuildUtility {
 			buildPlayerOptions.locationPathName = locationPathName;
 			buildPlayerOptions.target = buildTarget;
 
-			Console.WriteLine(BuildPipeline.BuildPlayer(buildPlayerOptions));
-			Console.WriteLine("Output at {0}", buildPlayerOptions.locationPathName);
+			var report = BuildPipeline.BuildPlayer(buildPlayerOptions);
+
+			switch (report.summary.result)
+			{
+				case UnityEditor.Build.Reporting.BuildResult.Succeeded:
+					Console.ForegroundColor = ConsoleColor.Green;
+					Console.WriteLine("Build succeeded! Executable is located at: {0}", buildPlayerOptions.locationPathName);
+					Console.ResetColor();
+					break;
+				default:
+					Environment.ExitCode = 1;
+					break;
+			}
+
 		}
 	}
 }
