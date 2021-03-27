@@ -2,7 +2,7 @@
 name: UPM Deployment
 
 env:
-  PACKAGE_ROOT: Build Utility/Assets/Build Utility
+  PACKAGE_ROOT: BuildUtility/Assets/BuildUtility
 
 on:
   push:
