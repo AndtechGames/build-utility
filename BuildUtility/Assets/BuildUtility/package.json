@@ -15,7 +15,6 @@
 		"email": "andtechgames@gmail.com",
 		"url": "https://github.com/AndtechGames/"
 	},
-	"repository": "https://github.com/AndtechGames/build-utility.git",
 	"license": "BSD-3-Clause",
 	"samples": [
 		{
@@ -23,5 +22,12 @@
 			"description": "Assets to display the version in the build.",
 			"path": "Samples/Version Label"
 		}
-	]
+	],
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/AndtechGames/build-utility.git"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/@AndtechGames"
+	}
 }
