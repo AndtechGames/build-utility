@@ -1,9 +1,9 @@
 {
 	"name": "com.andtech.build-utility",
-	"version": "0.1.6",
 	"displayName": "Build Utility",
-	"description": "Simple build helper",
+	"version": "0.1.7",
 	"unity": "2019.4",
+	"description": "Simple build helper",
 	"keywords": [
 		"andtech",
 		"build",
@@ -11,7 +11,7 @@
 	],
 	"type": "tool",
 	"author": {
-		"name": "AndtechGames",
+		"name": "Andtech Games",
 		"email": "andtechgames@gmail.com",
 		"url": "https://github.com/AndtechGames/"
 	},
